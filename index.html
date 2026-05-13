@@ -1,0 +1,625 @@
+# Hafiz Althaf Fathin — Personal Portfolio Website
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hafiz Althaf Fathin — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Syne:wght@400;500;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root{
+  --bg:#080808;
+  --surface:#111111;
+  --text:#f5f1eb;
+  --muted:#8d8d8d;
+  --accent:#c8a96e;
+  --border:rgba(255,255,255,0.08);
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Syne',sans-serif;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;
+  pointer-events:none;
+}
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  padding:28px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:100;
+  backdrop-filter:blur(10px);
+}
+
+.logo{
+  text-decoration:none;
+  color:var(--accent);
+  font-size:1.4rem;
+  font-weight:800;
+}
+
+.nav-links{
+  display:flex;
+  gap:40px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:var(--accent);
+}
+
+section{
+  padding:120px 60px;
+}
+
+#hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1.2fr 0.8fr;
+  align-items:center;
+  gap:60px;
+}
+
+.hero-eyebrow{
+  color:var(--accent);
+  font-family:'DM Mono',monospace;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  font-size:0.75rem;
+  margin-bottom:24px;
+}
+
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.5rem,8vw,7rem);
+  line-height:0.95;
+  margin-bottom:28px;
+}
+
+.hero-title em{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.hero-desc{
+  max-width:650px;
+  color:var(--muted);
+  line-height:1.8;
+  font-size:1rem;
+  margin-bottom:40px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:16px 30px;
+  text-decoration:none;
+  font-size:0.85rem;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  transition:0.3s;
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:#000;
+}
+
+.btn-primary:hover{
+  transform:translateY(-3px);
+}
+
+.btn-outline{
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.btn-outline:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.hero-image{
+  position:relative;
+}
+
+.hero-image img{
+  width:100%;
+  border-radius:24px;
+  object-fit:cover;
+  border:1px solid var(--border);
+  box-shadow:0 20px 80px rgba(0,0,0,0.4);
+}
+
+.section-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.75rem;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:0.2em;
+  margin-bottom:18px;
+}
+
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);
+  margin-bottom:30px;
+  line-height:1;
+}
+
+.section-title em{
+  color:var(--accent);
+  font-style:italic;
+}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:60px;
+}
+
+.about-text{
+  color:var(--muted);
+  line-height:1.9;
+  font-size:1rem;
+}
+
+.info-box{
+  border:1px solid var(--border);
+  padding:35px;
+  background:var(--surface);
+}
+
+.info-item{
+  margin-bottom:20px;
+}
+
+.info-item span{
+  display:block;
+  color:var(--accent);
+  font-size:0.8rem;
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+
+.info-item p{
+  color:var(--text);
+}
+
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+  margin-top:50px;
+}
+
+.skill-card{
+  border:1px solid var(--border);
+  padding:40px 30px;
+  background:var(--surface);
+  transition:0.3s;
+}
+
+.skill-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(200,169,110,0.3);
+}
+
+.skill-card h3{
+  margin-bottom:22px;
+  font-size:1.4rem;
+}
+
+.skill-card ul{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.skill-card li{
+  color:var(--muted);
+}
+
+.projects{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:30px;
+  margin-top:60px;
+}
+
+.project-card{
+  border:1px solid var(--border);
+  background:linear-gradient(135deg,#111,#1a1a1a);
+  padding:50px;
+  transition:0.4s;
+}
+
+.project-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(200,169,110,0.3);
+}
+
+.project-number{
+  font-family:'DM Mono',monospace;
+  color:var(--accent);
+  margin-bottom:18px;
+}
+
+.project-title{
+  font-size:2rem;
+  margin-bottom:18px;
+}
+
+.project-desc{
+  color:var(--muted);
+  line-height:1.8;
+  max-width:700px;
+  margin-bottom:30px;
+}
+
+.project-tags{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:30px;
+}
+
+.tag{
+  border:1px solid var(--border);
+  padding:8px 14px;
+  font-size:0.75rem;
+  color:var(--accent);
+}
+
+.project-link{
+  text-decoration:none;
+  color:#000;
+  background:var(--accent);
+  padding:14px 24px;
+  display:inline-block;
+  font-weight:700;
+  transition:0.3s;
+}
+
+.project-link:hover{
+  transform:translateX(5px);
+}
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  margin-top:60px;
+}
+
+.contact-card{
+  border:1px solid var(--border);
+  background:var(--surface);
+  padding:30px;
+}
+
+.contact-card span{
+  display:block;
+  color:var(--accent);
+  margin-bottom:8px;
+  font-size:0.8rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+}
+
+.contact-card a,
+.contact-card p{
+  color:var(--text);
+  text-decoration:none;
+  font-size:1rem;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:30px 60px;
+  text-align:center;
+  color:var(--muted);
+  font-size:0.9rem;
+}
+
+.reveal{
+  opacity:0;
+  transform:translateY(40px);
+  transition:all 0.8s ease;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:900px){
+  nav{
+    padding:24px;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  section{
+    padding:90px 24px;
+  }
+
+  #hero,
+  .about-grid,
+  .contact-grid,
+  .skills-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-title{
+    font-size:4rem;
+  }
+
+  footer{
+    padding:30px 24px;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Hafiz.dev</a>
+
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div>
+    <div class="hero-eyebrow">Information Technology Student</div>
+
+    <h1 class="hero-title">
+      Building <em>digital</em><br>
+      solutions with<br>
+      creativity & logic.
+    </h1>
+
+    <p class="hero-desc">
+      Hi, I'm Hafiz Althaf Fathin from Bekasi, Indonesia. I focus on web development, UI/UX design, and future AI technologies while continuously improving my technical and problem-solving skills through real-world projects.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="hafiz.jpg" alt="Hafiz Althaf Fathin">
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label reveal">About Me</div>
+
+  <h2 class="section-title reveal">
+    Passionate about <em>technology</em>,
+    growth, and building meaningful solutions.
+  </h2>
+
+  <div class="about-grid">
+    <div class="about-text reveal">
+      Hi, my name is Hafiz Althaf Fathin, an Information Technology student at Bina Sarana Informatika with a strong interest in developing digital solutions to solve real-world problems.
+      <br><br>
+      I’m passionate about continuously improving my skills in programming, problem-solving, and technology through hands-on practice and real projects. I enjoy learning new tools and adapting to the fast-paced changes in the tech industry.
+      <br><br>
+      With a strong mindset for growth and consistency, I aim to build innovative, efficient, and impactful solutions while growing into a professional in the technology field.
+    </div>
+
+    <div class="info-box reveal">
+      <div class="info-item">
+        <span>Name</span>
+        <p>Hafiz Althaf Fathin</p>
+      </div>
+
+      <div class="info-item">
+        <span>Location</span>
+        <p>Bekasi, Indonesia</p>
+      </div>
+
+      <div class="info-item">
+        <span>University</span>
+        <p>Bina Sarana Informatika</p>
+      </div>
+
+      <div class="info-item">
+        <span>Major</span>
+        <p>Information Technology</p>
+      </div>
+
+      <div class="info-item">
+        <span>Interested In</span>
+        <p>AI Engineer, Web Development, UI/UX</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label reveal">Expertise</div>
+
+  <h2 class="section-title reveal">
+    Skills & <em>Interests</em>
+  </h2>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <h3>Frontend Development</h3>
+
+      <ul>
+        <li>HTML, CSS & JavaScript</li>
+        <li>Responsive Web Design</li>
+        <li>Modern UI Development</li>
+        <li>Website Optimization</li>
+      </ul>
+    </div>
+
+    <div class="skill-card reveal">
+      <h3>UI/UX Design</h3>
+
+      <ul>
+        <li>Wireframing & Prototyping</li>
+        <li>Figma Design</li>
+        <li>User Interface Design</li>
+        <li>Design Thinking</li>
+      </ul>
+    </div>
+
+    <div class="skill-card reveal">
+      <h3>Technology Focus</h3>
+
+      <ul>
+        <li>Artificial Intelligence</li>
+        <li>Problem Solving</li>
+        <li>Continuous Learning</li>
+        <li>Creative Development</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label reveal">Portfolio</div>
+
+  <h2 class="section-title reveal">
+    Real <em>Projects</em>
+  </h2>
+
+  <div class="projects">
+    <div class="project-card reveal">
+      <div class="project-number">[ 01 ]</div>
+
+      <h3 class="project-title">
+        LEKKK — UI/UX Mobile Design Project
+      </h3>
+
+      <p class="project-desc">
+        A modern mobile UI/UX design project created in Figma with a focus on clean visual hierarchy, user-friendly experience, and modern interface aesthetics.
+      </p>
+
+      <div class="project-tags">
+        <div class="tag">Figma</div>
+        <div class="tag">UI Design</div>
+        <div class="tag">UX Design</div>
+        <div class="tag">Prototype</div>
+      </div>
+
+      <a class="project-link" href="https://www.figma.com/proto/gpbL1BLVSVaTyAg3Wsr1gx/LEKKK?node-id=279-1773&p=f&t=Cfh21MgmqHS43aVS-0&scaling=scale-down&content-scaling=fixed&page-id=279%3A1773&starting-point-node-id=279%3A1774" target="_blank">
+        Open Project →
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div>
+    <div class="section-label reveal">Contact</div>
+
+    <h2 class="section-title reveal">
+      Let's build<br>
+      something <em>great</em>.
+    </h2>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-card reveal">
+      <span>Email</span>
+      <a href="mailto:zifaalataf@gmail.com">zifaalataf@gmail.com</a>
+    </div>
+
+    <div class="contact-card reveal">
+      <span>WhatsApp</span>
+      <a href="https://wa.me/6285727962143" target="_blank">+62 857 2796 2143</a>
+    </div>
+
+    <div class="contact-card reveal">
+      <span>Instagram</span>
+      <a href="https://instagram.com/zifaalataf_" target="_blank">@zifaalataf_</a>
+    </div>
+
+    <div class="contact-card reveal">
+      <span>LinkedIn</span>
+      <a href="#">Hafiz Althaf</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2025 Hafiz Althaf Fathin — Personal Portfolio
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('active');
+    }
+  });
+});
+
+reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
+```
+
