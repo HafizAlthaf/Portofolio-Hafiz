@@ -648,13 +648,31 @@ reveals.forEach(el => observer.observe(el));
 const cursor = document.querySelector('.cursor');
 const blur = document.querySelector('.cursor-blur');
 
-window.addEventListener('mousemove', (e)=>{
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+let mouseX = 0;
+let mouseY = 0;
 
-  blur.style.left = e.clientX + 'px';
-  blur.style.top = e.clientY + 'px';
+let blurX = 0;
+let blurY = 0;
+
+window.addEventListener('mousemove', (e)=>{
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
 });
+
+function animateBlur(){
+  blurX += (mouseX - blurX) * 0.08;
+  blurY += (mouseY - blurY) * 0.08;
+
+  blur.style.left = blurX + 'px';
+  blur.style.top = blurY + 'px';
+
+  requestAnimationFrame(animateBlur);
+}
+
+animateBlur();
 </script>
 
 </body>
